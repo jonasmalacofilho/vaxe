@@ -343,11 +343,18 @@ function! vaxe#SetCompiler()
         let build_command = "cd " . escaped_wd . " && "
                     \."haxelib run flow build " . g:vaxe_flow_target . " 2>&1"
     else
+        if (g:vaxe_cache_server)
+            let cache_opts = "--cwd " . fnameescape(g:vaxe_working_directory)
+                    \. " --connect "
+                    \.  g:vaxe_cache_server_port
+        else
+            let cache_opts = ""
+        endif
         let vaxe_hxml = vaxe#CurrentBuild()
         let escaped_hxml = fnameescape(vaxe_hxml)
         call vaxe#Log("vaxe_hxml: " . vaxe_hxml)
         let build_command = "cd " . escaped_wd ." &&"
-                    \. g:vaxe_haxe_binary . " " . escaped_hxml . " 2>&1"
+                    \. g:vaxe_haxe_binary . " " . cache_opts . " " . escaped_hxml . " 2>&1"
         if filereadable(vaxe_hxml)
             let lines = readfile(vaxe_hxml)
         endif
