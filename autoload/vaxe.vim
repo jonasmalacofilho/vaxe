@@ -55,6 +55,7 @@ function! vaxe#StartCacheServer()
         if haxe_version != '0'
             echomsg "Compilation server is already running on port "
                         \ . g:vaxe_cache_server_port
+            let g:vaxe_cache_server_pid = -1
         else
             let pid =  vaxe#util#SimpleSystem(g:vaxe_haxe_binary . " --wait "
                         \. g:vaxe_cache_server_port . "& echo $!")
