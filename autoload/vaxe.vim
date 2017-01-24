@@ -439,7 +439,8 @@ function! vaxe#Ctags()
         let hxml_sys = " cd " . hxml_cd . ";"
                     \." ctags --languages=haxe --exclude=_std -R " . pathstr. ";"
         call vaxe#Log(hxml_sys)
-        call system(hxml_sys)
+        let ctagsout = system("bash -c '" . hxml_sys . "'")
+        call vaxe#Log(ctagsout)
     endif
 endfunction
 
