@@ -550,7 +550,7 @@ function! s:CompletionHxml(file_name, byte_count)
                     \.  g:vaxe_cache_server_port
                     \. " \n" . stripped
     endif
-    return stripped."\n--display ".fnameescape(a:file_name).'@'.a:byte_count
+    return stripped."\n-D old-error-format \n--display ".fnameescape(a:file_name).'@'.a:byte_count
 endfunction
 
 if g:vaxe_haxe_version >=3
